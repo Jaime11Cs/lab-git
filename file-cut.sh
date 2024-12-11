@@ -16,7 +16,7 @@ do
   sed -n "${i}p" "$file" >> "$output_file"
 done
 
-  echo "Líneas seleccionadas guardas en $output_file"
+  echo "Líneas seleccionadas guardadas en $output_file"
 done
 
 
