@@ -1,11 +1,24 @@
 
-
-for i in *.fastq
+for file in *.fastq
 do
-  total_lineas=$(wc -l < "$i")
-  tercio=$((total_lineas / 3))
-  head -n "$tercio" "$i" > "${i%.fastq}_cortado.fastq"
-  echo "Archivo procesado: $i -> ${i%.fastq}_cortado.fastq"
+#Genero un archivo de salida con las líneas seleccionadas
+output_file="${file%.fastq}_seleccionado.fastq"
+
+> "$output_file"
+
+#Inicializar el contador de líneas
+total_lines=$(wc -l < "$file")
+
+#Extraigo cada 3 líneas
+
+for (( i=1; i<=total_lines; i+=3));
+do
+  sed -n "${i}p" "$file" >> "$output_file"
 done
+
+  echo "Líneas seleccionadas guardas en $output_file"
+done
+
+
 
 
